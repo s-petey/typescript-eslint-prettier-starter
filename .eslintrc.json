@@ -3,8 +3,22 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "prettier"],
-  "overrides": [],
+  "extends": ["eslint:recommended", "eslint-config-prettier", "plugin:prettier/recommended", "prettier"],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+      ],
+      "plugins": ["@typescript-eslint"],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "project": ["tsconfig.json"]
+      }
+    }
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -12,6 +26,10 @@
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    // Code smell
+    "complexity": ["error"],
+    "max-depth": ["warn"],
+    "max-nested-callbacks": ["warn"]
   }
 }
